@@ -1,0 +1,33 @@
+* {
+  font-family: Roboto;
+  letter-spacing: 0.02em;
+}
+
+.App {
+  flex-direction: column;
+  background-color: #e5e5e5;
+}
+
+.Header {
+  height: 56px;
+  background: #353d4b;
+}
+
+.flexBlock {
+  display: flex;
+  flex-direction: row;
+}
+
+.SideBar {
+  width: 280px;
+  height: 100vh;
+  background: #ffffff;
+}
+
+.Content {
+  width: 100%;
+}
+
+body {
+  margin: 0;
+}
