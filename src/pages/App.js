@@ -1,19 +1,38 @@
-import { Header } from "../organisms/Header";
-import { SideBar } from "../organisms/SideBar";
-import { UsersTableContainer } from "../organisms/UsersTable/UsersTableContainer";
-import style from "./styles.module.css";
+import {Header} from "../organisms/Header";
+import {SideBar} from "../organisms/SideBar";
+import {UsersTableContainer} from "../organisms/UsersTable/UsersTableContainer";
 import "typeface-roboto";
+import styled from "styled-components"
+import "./styles.module.css"
 
 export const App = () => {
-  return (
-    <div className={style.App}>
-      <Header />
-      <div className={style.flexBlock}>
-        <SideBar />
-        <div className={style.Content}>
-          <UsersTableContainer />
-        </div>
-      </div>
-    </div>
-  );
+
+    let AppBlock = styled.div`
+      flex-direction: column;
+      background-color: #e5e5e5;
+      height: 100%;
+    `;
+
+    let FlexBlock = styled.div`
+      display: flex;
+      flex-direction: row;
+    `;
+
+    let ContentBlock = styled.div`
+      width: 100%;
+
+    `;
+
+
+    return (
+        <AppBlock>
+            <Header/>
+            <FlexBlock>
+                <SideBar/>
+                <ContentBlock>
+                    <UsersTableContainer/>
+                </ContentBlock>
+            </FlexBlock>
+        </AppBlock>
+    );
 };

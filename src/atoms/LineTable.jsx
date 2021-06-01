@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import { UpdateUserBtn } from "../molecules/UpdateUserBtn";
-import { DeleteUserBtn } from "../molecules/DeleteUserBtn";
+import { ModalUpdateUserBtn } from "../molecules/ModalUpdateUserBtn";
+import { ModalDeleteUserBtn } from "../molecules/ModalDeleteUserBtn";
 
 export const LineTable = ({
   user,
   itsHeader,
   itsRows,
   setUpdateModalActive,
-  DeleteUserHandler
+  setDeleteModalActive,
+  setCurrentUserId
 }) => {
   let LineTable = styled.div`
     display: flex;
@@ -43,8 +44,8 @@ export const LineTable = ({
       {itsRows && (
         <CellTable>
           <ButtonBlock>
-            <UpdateUserBtn onClickEvent={setUpdateModalActive} user={user} />
-            <DeleteUserBtn onClickEvent={DeleteUserHandler} userId={user.id} />
+            <ModalUpdateUserBtn showModal={setUpdateModalActive} userId={user.id} setCurrentUserId={setCurrentUserId} />
+            <ModalDeleteUserBtn showModal={setDeleteModalActive} userId={user.id} setCurrentUserId={setCurrentUserId} />
           </ButtonBlock>
         </CellTable>
       )}

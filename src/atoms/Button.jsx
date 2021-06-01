@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const Button = (props) => {
   let Button = styled.button`
@@ -12,6 +12,7 @@ export const Button = (props) => {
     font-size: 14px;
     letter-spacing: 0.03em;
     cursor: pointer;
+    ${props.create && css`width: 153px`}
   `;
 
   let Img = styled.img`
@@ -21,7 +22,7 @@ export const Button = (props) => {
 
   return (
     <Button onClick={props.onClickEvent}>
-      <Img src={props.icon} alt="icon" />
+      {props.create ? "" : <Img src={props.icon} alt="icon"/>}
       {props.text}
     </Button>
   );

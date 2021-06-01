@@ -1,11 +1,12 @@
 import { LineTable } from "../../atoms/LineTable";
 
-export const TableRow = ({ user, setUpdateModalActive, DeleteUserHandler }) => {
+export const TableRow = ({ user, setUpdateModalActive, setDeleteModalActive, setCurrentUserId }) => {
   return (
     <LineTable
       user={user}
       setUpdateModalActive={setUpdateModalActive}
-      DeleteUserHandler={DeleteUserHandler}
+      setDeleteModalActive={setDeleteModalActive}
+      setCurrentUserId={setCurrentUserId}
       itsRows={true}
     />
   );
