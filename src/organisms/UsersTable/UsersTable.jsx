@@ -1,18 +1,10 @@
 import {ModalAddUserBtn} from "../../molecules/ModalAddUserBtn";
 import {TableHeader} from "../../molecules/table/TableHeader";
 import {TableRow} from "../../molecules/table/TableRow";
-import {useState} from "react";
 import styled from "styled-components";
 
 export const UsersTable = ({
-
                                users,
-
-                               //кнопки в модалки
-                               AddUserHandler,
-                               UpdateUserHandler,
-                               DeleteUserHandler,
-
                                //отображение модалок
                                setUpdateModalActive,
                                setCreateModalActive,

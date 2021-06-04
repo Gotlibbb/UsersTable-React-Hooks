@@ -1,6 +1,7 @@
 import {UsersTable} from "./UsersTable";
 import {useState} from "react";
 import {ModalWindowTable} from "../../molecules/table/ModalWindowTable";
+import {v1} from "uuid";
 
 const initUsers = [
     {
@@ -9,7 +10,7 @@ const initUsers = [
         fatherName: "Иванович",
         email: "mail1@mail.com",
         login: "user1",
-        id: 1
+        id: v1(),
     },
     {
         sername: "Петров",
@@ -17,7 +18,7 @@ const initUsers = [
         fatherName: "Сергеевич",
         email: "mail2@mail.com",
         login: "user2",
-        id: 2
+        id: v1(),
     },
     {
         sername: "Сергеев",
@@ -25,7 +26,7 @@ const initUsers = [
         fatherName: "Викторович",
         email: "mail3@mail.com",
         login: "user3",
-        id: 3
+        id: v1(),
     },
     {
         sername: "Федоров",
@@ -33,7 +34,7 @@ const initUsers = [
         fatherName: "Федорович",
         email: "mail4@mail.com",
         login: "user4",
-        id: 4
+        id: v1(),
     },
     {
         sername: "Хвастунов",
@@ -41,7 +42,7 @@ const initUsers = [
         fatherName: "Петрович",
         email: "mail5@mail.com",
         login: "user5",
-        id: 5
+        id: v1(),
     },
     {
         sername: "Григорьев",
@@ -49,19 +50,12 @@ const initUsers = [
         fatherName: "Григорьевич",
         email: "mail6@mail.com",
         login: "user6",
-        id: 6
-    }
+        id: v1(),
+    },
 ];
 
 export const UsersTableContainer = () => {
-    let user = {
-        sername: "Григорьев",
-        name: "Федор",
-        fatherName: "Григорьевич",
-        email: "mail6@mail.com",
-        login: "user6",
-        id: 6
-    }
+
     const [users, setUsers] = useState(initUsers);
 
     const AddUserHandler = (newUser) => {
@@ -73,7 +67,7 @@ export const UsersTableContainer = () => {
                 fatherName: newUser.fatherName,
                 email: newUser.email,
                 login: newUser.login,
-                id: 7
+                id: v1(),
             }
         ]);
     };
@@ -100,10 +94,21 @@ export const UsersTableContainer = () => {
     //актуальный userId
     const [currentUserId, setCurrentUserId] = useState("")
 
+    // if (updateModalActive || createModalActive || deleteModalActive) document.body.style.overflow = "hidden"
 
     return (
         <>
-            <ModalWindowTable user={user} modalTitle={"Создание пользователя"}/>
+            {createModalActive && <ModalWindowTable createModalActive users={users} closeModal={setCreateModalActive}
+                                                    AddUserHandler={AddUserHandler}/>}
+
+            {updateModalActive && <ModalWindowTable updateModalActive users={users} closeModal={setUpdateModalActive}
+                                                    UpdateUserHandler={UpdateUserHandler}
+                                                    currentUserId={currentUserId}/>}
+
+            {deleteModalActive && <ModalWindowTable deleteModalActive users={users} closeModal={setDeleteModalActive}
+                                                    DeleteUserHandler={DeleteUserHandler}
+                                                    currentUserId={currentUserId}/>}
+
             <UsersTable
                 users={users}
                 AddUserHandler={AddUserHandler}
@@ -116,4 +121,4 @@ export const UsersTableContainer = () => {
             />
         </>
     );
-};
+}

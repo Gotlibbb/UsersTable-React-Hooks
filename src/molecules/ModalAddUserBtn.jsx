@@ -1,5 +1,5 @@
 import add from "../atoms/icons/add.png";
-import {Button} from "../atoms/Button";
+import {ButtonAm} from "../atoms/ButtonAm";
 
 export const ModalAddUserBtn = ({showModal}) => {
   const onClickHandler = () => {
@@ -7,10 +7,10 @@ export const ModalAddUserBtn = ({showModal}) => {
   }
 
   return (
-      <Button
+      <ButtonAm
           onClickEvent={onClickHandler}
           icon={add}
-          typeButton={"add"}
+          typeButton={"primary"}
           text={" Добавить"}
       />
   );

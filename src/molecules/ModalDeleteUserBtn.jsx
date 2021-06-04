@@ -1,5 +1,5 @@
 import trash from "../atoms/icons/trash.png";
-import { Button } from "../atoms/Button";
+import { ButtonAm } from "../atoms/ButtonAm";
 
 export const ModalDeleteUserBtn = ({ showModal, userId, setCurrentUserId }) => {
   const onClickHandler = () => {
@@ -8,7 +8,7 @@ export const ModalDeleteUserBtn = ({ showModal, userId, setCurrentUserId }) => {
   }
 
   return (
-    <Button
+    <ButtonAm
       onClickEvent={onClickHandler}
       icon={trash}
       typeButton={"icon"}

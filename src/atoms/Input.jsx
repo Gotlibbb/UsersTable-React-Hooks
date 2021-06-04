@@ -4,7 +4,7 @@ import {useState} from "react";
     let InputBlock = styled.div`
         display: flex;
         flex-direction: column;
-        padding: 28px  64px 0 ;
+        padding: 28px  64px 0;
     `;
     let Title = styled.span`
         color: #818C99;
@@ -27,14 +27,14 @@ import {useState} from "react";
         padding: 8px 12px;
     `;
 
-export const Input = ({title, placeHolder, initInputValue=""}) => {
+export const Input = ({title, placeHolder, valueInput, setValueInput}) => {
 
-    let [value, setValue] = useState(initInputValue)
+
 
     return (
             <InputBlock>
                 <Title>{title}</Title>
-                <InputSC type={"text"} placeholder={placeHolder} value={value} onChange={(e)=>setValue(e.currentTarget.value)}/>
+                <InputSC type={"text"} placeholder={placeHolder} value={valueInput} onChange={(e)=>setValueInput(e.currentTarget.value)}/>
             </InputBlock>
     )
 }

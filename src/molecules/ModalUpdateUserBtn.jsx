@@ -1,5 +1,5 @@
 import pencil from "../atoms/icons/pencil.png";
-import { Button } from "../atoms/Button";
+import { ButtonAm } from "../atoms/ButtonAm";
 
 export const ModalUpdateUserBtn = ({ showModal, setCurrentUserId, userId }) => {
     const onClickHandler = () => {
@@ -7,7 +7,7 @@ export const ModalUpdateUserBtn = ({ showModal, setCurrentUserId, userId }) => {
     setCurrentUserId(userId)
   }
   return (
-    <Button
+    <ButtonAm
       onClickEvent={onClickHandler}
       icon={pencil}
       typeButton={"icon"}
