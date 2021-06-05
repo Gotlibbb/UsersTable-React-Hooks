@@ -193,7 +193,7 @@ export const ModalWindowTable =
                         setNewEmail={setNewEmail}
 
                         newLogin={newLogin}
-                        setNewLogin={setNewLogin}
+                        setNewLogin={setNewLogin }
                     />}
 
                     {deleteModalActive && <DeleteWarning>Удалить выбранного пользователя?</DeleteWarning>}
