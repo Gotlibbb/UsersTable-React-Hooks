@@ -1,7 +1,7 @@
 import {Input} from "../../atoms/Input";
 import styled from "styled-components";
 import {ButtonAm} from "../../atoms/ButtonAm";
-import {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {v1} from "uuid";
 
 
@@ -14,12 +14,27 @@ let ModalContainer = styled.div`
   width: 100vw;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
+
 `;
 let ModalWindow = styled.div`
   background: white;
   border-radius: 10px;
   width: 608px;
+
+  animation: show-modal 0.3s forwards;
+
+  @keyframes show-modal {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 `;
 let ModalHead = styled.div`
   display: flex;
@@ -37,12 +52,16 @@ let Out = styled.span`
   flex: 1;
   padding-top: 2px;
   padding-right: 24px;
-  cursor: pointer;
+
+  span {
+    cursor: pointer;
+  }
 
 `;
 let Title = styled.span`
   position: absolute;
   text-align: center;
+
 `;
 
 let ModalFooter = styled.div`
@@ -54,7 +73,6 @@ let ModalFooter = styled.div`
   background: #F6F7F9;
   border-radius: 0 0 10px 10px;
   padding-right: 24px;
-  //margin-top: 50px;
 `;
 
 let DeleteWarning = styled.div`
@@ -63,14 +81,12 @@ let DeleteWarning = styled.div`
   align-items: center;
   height: 168px;
   font-size: 16px;
-  //border: 1px solid;
 `;
 let InputsBl = styled.div`
   margin-bottom: 56px;
-  //border: 1px solid;
 `;
 
-const InputsBlock = (props) => {
+const InputsBlock = React.memo((props) => {
     return <InputsBl>
         <Input title={"Фамилия"} placeHolder={"Введите фамилию"} valueInput={props.newSerName}
                setValueInput={props.setNewSerName}/>
@@ -82,22 +98,22 @@ const InputsBlock = (props) => {
         <Input title={"Логин"} placeHolder={"Введите логин"} valueInput={props.newLogin}
                setValueInput={props.setNewLogin}/>
     </InputsBl>
-}
+})
 
 export const ModalWindowTable =
-    ({
-         users,
-         deleteModalActive,
-         createModalActive,
-         updateModalActive,
-         closeModal,
-         currentUserId,
-         AddUserHandler,
-         UpdateUserHandler,
-         DeleteUserHandler,
+    React.memo(({
+                    users,
+                    deleteModalActive,
+                    createModalActive,
+                    updateModalActive,
+                    closeModal,
+                    currentUserId,
+                    AddUserHandler,
+                    UpdateUserHandler,
+                    DeleteUserHandler,
 
 
-     }) => {
+                }) => {
 
 
         let initInputValueHandler = (value) => {
@@ -109,8 +125,6 @@ export const ModalWindowTable =
             }
             return ""
         }
-
-        console.log(initInputValueHandler("sername"))
 
         let [newSerName, setNewSerName] = useState(initInputValueHandler("sername"))
         let [newName, setNewName] = useState(initInputValueHandler("name"))
@@ -136,22 +150,22 @@ export const ModalWindowTable =
         }
 
 
-        const createUser = () => {
-
+        const createUser = useCallback((newUser) => {
             closeModal(false)
             AddUserHandler(newUser)
-        }
+        }, [closeModal, AddUserHandler])
 
-        const updateUser = (user, userId) => {
+        const updateUser = useCallback((user, userId) => {
             closeModal(false)
             UpdateUserHandler(user, userId)
-        }
+        }, [closeModal, updateModalActive])
 
-        const deleteUser = () => {
+        const deleteUser = useCallback(() => {
             closeModal(false)
             DeleteUserHandler(currentUserId)
-        }
+        }, [currentUserId, DeleteUserHandler, closeModal])
 
+        const checkInput = !(newLogin && newEmail && newFatherName && newName && newSerName);
 
         return (
             <ModalContainer>
@@ -160,7 +174,8 @@ export const ModalWindowTable =
                         {createModalActive && <Title>Создание пользователя</Title>}
                         {updateModalActive && <Title>Редактирование пользователя</Title>}
                         {deleteModalActive && <Title>Удаление пользователя</Title>}
-                        <Out onClick={() => closeModal(false)}>⨉</Out>
+                        <Out><span onClick={() => closeModal(false)}>⨉</span></Out>
+
                     </ModalHead>
 
                     {(createModalActive || updateModalActive) && <InputsBlock
@@ -185,16 +200,23 @@ export const ModalWindowTable =
 
                     <ModalFooter>
                         {createModalActive &&
-                        <ButtonAm create typeButton={"primary"} onClickEvent={createUser} text={"Создать"}/>}
+                        <ButtonAm create disabled={checkInput} typeButton={"primary"}
+                                  onClickEvent={() => createUser(newUser)}
+                                  text={"Создать"}/>}
 
                         {updateModalActive &&
-                        <ButtonAm create typeButton={"primary"} onClickEvent={() => updateUser(upUser, currentUserId)}
+                        <ButtonAm create disabled={checkInput} typeButton={"primary"}
+                                  onClickEvent={() => updateUser(upUser, currentUserId)}
                                   text={"Редактировать"}/>}
 
                         {deleteModalActive &&
+                        <ButtonAm create typeButton={"basic"} onClickEvent={() => closeModal(false)}
+                                  text={"Отменить"}/>}
+                        {deleteModalActive &&
                         <ButtonAm create typeButton={"primary"} onClickEvent={deleteUser} text={"Удалить"}/>}
+
                     </ModalFooter>
                 </ModalWindow>
             </ModalContainer>
         )
-    }
+    })

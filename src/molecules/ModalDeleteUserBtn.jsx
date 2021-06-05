@@ -1,7 +1,8 @@
 import trash from "../atoms/icons/trash.png";
 import { ButtonAm } from "../atoms/ButtonAm";
+import React from "react";
 
-export const ModalDeleteUserBtn = ({ showModal, userId, setCurrentUserId }) => {
+export const ModalDeleteUserBtn = React.memo(({ showModal, userId, setCurrentUserId }) => {
   const onClickHandler = () => {
     showModal(true)
     setCurrentUserId(userId)
@@ -14,4 +15,4 @@ export const ModalDeleteUserBtn = ({ showModal, userId, setCurrentUserId }) => {
       typeButton={"icon"}
     />
   );
-};
+})

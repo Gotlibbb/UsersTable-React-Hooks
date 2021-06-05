@@ -1,5 +1,5 @@
 import {UsersTable} from "./UsersTable";
-import {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {ModalWindowTable} from "../../molecules/table/ModalWindowTable";
 import {v1} from "uuid";
 
@@ -54,13 +54,13 @@ const initUsers = [
     },
 ];
 
-export const UsersTableContainer = () => {
+export const UsersTableContainer = React.memo(() => {
 
     const [users, setUsers] = useState(initUsers);
 
-    const AddUserHandler = (newUser) => {
+    const AddUserHandler = useCallback((newUser) => {
         setUsers([
-            ...users,
+
             {
                 sername: newUser.sername,
                 name: newUser.name,
@@ -68,11 +68,11 @@ export const UsersTableContainer = () => {
                 email: newUser.email,
                 login: newUser.login,
                 id: v1(),
-            }
+            }, ...users
         ]);
-    };
+    }, [users, setUsers]);
 
-    const UpdateUserHandler = (upUserData, userId) => {
+    const UpdateUserHandler = useCallback((upUserData, userId) => {
         setUsers(
             users.map((u, i) => {
                 if (u.id === userId) {
@@ -81,11 +81,11 @@ export const UsersTableContainer = () => {
                 return u;
             })
         );
-    };
+    }, [users, setUsers])
 
-    const DeleteUserHandler = (userId) => {
+    const DeleteUserHandler = useCallback((userId) => {
         setUsers(users.filter((u) => u.id !== userId));
-    };
+    }, [users, setUsers]);
 
     //активация модальных окон
     const [updateModalActive, setUpdateModalActive] = useState(false);
@@ -121,4 +121,4 @@ export const UsersTableContainer = () => {
             />
         </>
     );
-}
+})

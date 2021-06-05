@@ -1,7 +1,8 @@
 import pencil from "../atoms/icons/pencil.png";
 import { ButtonAm } from "../atoms/ButtonAm";
+import React from "react";
 
-export const ModalUpdateUserBtn = ({ showModal, setCurrentUserId, userId }) => {
+export const ModalUpdateUserBtn = React.memo(({ showModal, setCurrentUserId, userId }) => {
     const onClickHandler = () => {
     showModal(true)
     setCurrentUserId(userId)
@@ -13,4 +14,4 @@ export const ModalUpdateUserBtn = ({ showModal, setCurrentUserId, userId }) => {
       typeButton={"icon"}
     />
   );
-};
+})

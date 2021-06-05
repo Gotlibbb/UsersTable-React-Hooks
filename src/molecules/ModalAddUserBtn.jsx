@@ -1,7 +1,8 @@
 import add from "../atoms/icons/add.png";
 import {ButtonAm} from "../atoms/ButtonAm";
+import React from "react";
 
-export const ModalAddUserBtn = ({showModal}) => {
+export const ModalAddUserBtn = React.memo(({showModal}) => {
   const onClickHandler = () => {
     showModal(true)
   }
@@ -14,4 +15,4 @@ export const ModalAddUserBtn = ({showModal}) => {
           text={" Добавить"}
       />
   );
-};
+})

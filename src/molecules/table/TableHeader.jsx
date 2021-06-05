@@ -1,5 +1,5 @@
-import { LineTable } from "../../atoms/LineTable";
+import { LineTableAm } from "../../atoms/LineTableAm";
 
 export const TableHeader = () => {
-  return <LineTable itsHeader={true} />;
+  return <LineTableAm itsHeader={true} />;
 };

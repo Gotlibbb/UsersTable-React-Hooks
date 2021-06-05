@@ -1,8 +1,9 @@
-import { LineTable } from "../../atoms/LineTable";
+import { LineTableAm } from "../../atoms/LineTableAm";
+import React from "react";
 
-export const TableRow = ({ user, setUpdateModalActive, setDeleteModalActive, setCurrentUserId }) => {
+export const TableRow = React.memo(({ user, setUpdateModalActive, setDeleteModalActive, setCurrentUserId }) => {
   return (
-    <LineTable
+    <LineTableAm
       user={user}
       setUpdateModalActive={setUpdateModalActive}
       setDeleteModalActive={setDeleteModalActive}
@@ -10,4 +11,4 @@ export const TableRow = ({ user, setUpdateModalActive, setDeleteModalActive, set
       itsRows={true}
     />
   );
-};
+})

@@ -1,29 +1,27 @@
-import {Header} from "../organisms/Header";
-import {SideBar} from "../organisms/SideBar";
+import {Header} from "../organisms/HeaderBlock";
+import {SideBar} from "../organisms/SideBarBLock";
 import {UsersTableContainer} from "../organisms/UsersTable/UsersTableContainer";
 import "typeface-roboto";
 import styled from "styled-components"
 import "./styles.module.css"
+import React from "react";
 
-export const App = () => {
+let AppBlock = styled.div`
+  flex-direction: column;
+  background-color: #e5e5e5;
+  height: 100%;
+`;
 
-    let AppBlock = styled.div`
-      flex-direction: column;
-      background-color: #e5e5e5;
-      height: 100%;
-    `;
+let FlexBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
-    let FlexBlock = styled.div`
-      display: flex;
-      flex-direction: row;
-    `;
+let ContentBlock = styled.div`
+  width: 100%;
+`;
 
-    let ContentBlock = styled.div`
-      width: 100%;
-
-    `;
-
-
+export const App = React.memo(() => {
     return (
         <AppBlock>
             <Header/>
@@ -35,4 +33,4 @@ export const App = () => {
             </FlexBlock>
         </AppBlock>
     );
-};
+})

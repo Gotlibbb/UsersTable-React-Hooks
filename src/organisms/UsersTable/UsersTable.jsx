@@ -2,8 +2,25 @@ import {ModalAddUserBtn} from "../../molecules/ModalAddUserBtn";
 import {TableHeader} from "../../molecules/table/TableHeader";
 import {TableRow} from "../../molecules/table/TableRow";
 import styled from "styled-components";
+import React from "react";
 
-export const UsersTable = ({
+let TableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+let AddUsersBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+`;
+
+export const UsersTable = React.memo(({
                                users,
                                //отображение модалок
                                setUpdateModalActive,
@@ -14,21 +31,6 @@ export const UsersTable = ({
                                setCurrentUserId,
                            }) => {
 
-    let TableContainer = styled.div`
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    `;
-    let AddUsersBlock = styled.div`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 32px;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 28px;
-    `;
 
     return (
         <TableContainer>
@@ -52,4 +54,4 @@ export const UsersTable = ({
         </TableContainer>
 
     );
-};
+})
